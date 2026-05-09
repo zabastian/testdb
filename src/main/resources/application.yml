@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: test
+
+  datasource:
+    url: jdbc:mysql://localhost:3308/testdb
+    username: root
+    password: root

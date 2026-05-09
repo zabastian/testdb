@@ -1,13 +1,13 @@
-package com.sparta.test_code;
+package com.example.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestCodeApplication {
+public class TestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestCodeApplication.class, args);
+        SpringApplication.run(TestApplication.class, args);
     }
 
 }
