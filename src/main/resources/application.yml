@@ -11,3 +11,5 @@ spring:
     hibernate:
       ddl-auto: update
     #
+jwt:
+  secret : siuiamronaldo

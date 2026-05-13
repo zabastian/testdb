@@ -15,4 +15,11 @@ public class AuthResponseDto {
     @NotBlank(message = "userRole 오류")
     private String userPassword;
 
+    private String accessToken;
+
+    public AuthResponseDto(String userEmail, String userPassword) {
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+    }
+
 }

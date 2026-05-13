@@ -6,6 +6,9 @@ import lombok.Getter;
 @Getter
 public class AuthRequestDto {
 
+/*    @NotBlank(message = "userId가 빈값입니다.")
+    private Long userId;*/
+
     @NotBlank(message = "userEmail 비면 안됩니다.")
     private String userEmail;
 

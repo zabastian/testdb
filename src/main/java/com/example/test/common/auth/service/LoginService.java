@@ -5,6 +5,8 @@ import com.example.test.common.auth.dto.AuthResponseDto;
 import com.example.test.common.auth.repostitory.LoginRepository;
 import com.example.test.common.user.entity.User;
 import com.example.test.common.user.entity.UserRole;
+import com.example.test.security.PasswordEncoder;
+import com.example.test.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     private final LoginRepository loginRepository;
+    private final TokenService tokenService;
 
     public AuthResponseDto signup(AuthRequestDto authRequestDto) {
 
@@ -20,11 +23,28 @@ public class LoginService {
         user.setUserEmail(authRequestDto.getUserEmail());
         user.setUserPassword(authRequestDto.getUserPassword());
         user.setUserRole(UserRole.OWNER);*/
+        String encodedPassword = PasswordEncoder.encode(authRequestDto.getUserPassword());
 
-        User user = new User(authRequestDto.getUserEmail(), authRequestDto.getUserPassword(), UserRole.OWNER);
+
+        User user = new User(authRequestDto.getUserEmail(), encodedPassword, UserRole.OWNER);
 
         User savedUser = loginRepository.save(user);
 
         return new AuthResponseDto(savedUser.getUserEmail(), savedUser.getUserPassword());
+    }
+
+    public AuthResponseDto login(AuthRequestDto authRequestDto) {
+
+        User user = loginRepository.findByUserEmail(authRequestDto.getUserEmail())
+                .orElseThrow(()-> new RuntimeException("유저없음"));
+
+        if (!PasswordEncoder.matches(authRequestDto.getUserPassword(), user.getUserPassword())) {
+            throw new RuntimeException("LOGIN_FAILED");
+        }
+
+        String accessToken = tokenService.createAccessToken(user.getId(), user.getUserRole());
+
+
+        return new AuthResponseDto(user.getUserEmail(), user.getUserPassword(), accessToken);
     }
 }
