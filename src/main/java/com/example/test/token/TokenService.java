@@ -22,8 +22,8 @@ public class TokenService {
     private static final String BEARER_PREFIX = "Bearer ";
     private final RefreshTokenRepository refreshTokenRepository;
 
-    @Value("${jwt.secrete}")
-    private String secrete;
+    @Value("${jwt.secret}")
+    private String secret;
 
     public TokenService(RefreshTokenRepository refreshTokenRepository) {
         this.refreshTokenRepository = refreshTokenRepository;
@@ -35,7 +35,7 @@ public class TokenService {
     @Transactional
     public String createAccessToken(Long userId, UserRole role) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secrete);
+            Algorithm algorithm = Algorithm.HMAC256(secret);
             Date expiresAt = Date.from(Instant.now().plus(15, ChronoUnit.MINUTES));
             //
             String token = JWT.create()
@@ -86,7 +86,7 @@ public class TokenService {
     public DecodedJWT verifyToken(String bearerToken) {
 
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secrete);
+            Algorithm algorithm = Algorithm.HMAC256(secret);
 
             String token = bearerToken.substring((BEARER_PREFIX.length()));
             JWTVerifier verifier = JWT.require(algorithm)
