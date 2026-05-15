@@ -3,7 +3,7 @@ spring:
     name: test
 
   datasource:
-    url: jdbc:mysql://localhost:3308/testdb
+    url: jdbc:mysql://localhost:3306/testdb
     username: root
     password: root
 

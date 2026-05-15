@@ -7,6 +7,7 @@ import com.example.test.common.user.entity.User;
 import com.example.test.common.user.entity.UserRole;
 import com.example.test.security.PasswordEncoder;
 import com.example.test.token.TokenService;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,13 @@ public class LoginService {
 
         String accessToken = tokenService.createAccessToken(user.getId(), user.getUserRole());
 
+        Cookie cookie = new Cookie("accessToken", accessToken);
 
-        return new AuthResponseDto(user.getUserEmail(), user.getUserPassword(), accessToken);
+        cookie.setPath("/");
+        cookie.setMaxAge(3600);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+
+        return new AuthResponseDto(user.getUserEmail(), accessToken, cookie);
     }
 }
