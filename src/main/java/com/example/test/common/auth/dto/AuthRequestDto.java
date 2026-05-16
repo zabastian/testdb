@@ -14,4 +14,7 @@ public class AuthRequestDto {
 
     @NotBlank(message = "userPassword 비면 안됩니다.")
     private String userPassword;
+
+    @NotBlank(message = " recaptcha 비면 안됩니다.")
+    private String recaptcha;
 }

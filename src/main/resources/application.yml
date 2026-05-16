@@ -3,7 +3,7 @@ spring:
     name: test
 
   datasource:
-    url: jdbc:mysql://localhost:3306/testdb
+    url: jdbc:mysql://localhost:3308/testdb
     username: root
     password: root
 
@@ -13,3 +13,6 @@ spring:
     #
 jwt:
   secret : siuiamronaldo
+
+recaptcha:
+  secret-key : 6Lc3q-wsAAAAACKFOgH86RuwDYOrx_F_euRk3nCK

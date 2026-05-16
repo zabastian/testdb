@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://www.google.com/recaptcha/api.js?render=SITE_KEY"></script>
+</head>
+<body>
+
+<h1>로그인 테스트</h1>
+
+<form id="loginForm">
+
+    <input type="text" id="email" placeholder="email">
+    <input type="password" id="password" placeholder="password">
+
+    <button type="submit">
+        로그인
+    </button>
+
+</form>
+
+<script>
+
+    document.getElementById("loginForm")
+        .addEventListener("submit", async function(e) {
+
+            e.preventDefault();
+
+            const token = await grecaptcha.execute(
+                'SITE_KEY',
+                {action: 'login'}
+            );
+
+            const response = await fetch("/login", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value,
+                    recaptchaToken: token
+                })
+            });
+
+            console.log(await response.text());
+        });
+
+</script>
+
+</body>
+</html>
