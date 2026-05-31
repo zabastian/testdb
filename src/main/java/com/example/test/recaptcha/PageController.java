@@ -8,6 +8,11 @@ public class PageController {
 
     @GetMapping("/")
     public String index() {
-        return "index.html";
+        return "index";
     }
+
+   /* @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }*/
 }

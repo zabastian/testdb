@@ -21,9 +21,9 @@ public class AuthResponseDto {
 
     private Cookie cookie;
 
-    public AuthResponseDto(String userEmail, String userPassword) {
+    public AuthResponseDto(String userEmail, String accessToken) {
         this.userEmail = userEmail;
-        this.userPassword = userPassword;
+        this.accessToken = accessToken;
     }
 
     public AuthResponseDto(String userEmail, String accessToken, Cookie cookie) {

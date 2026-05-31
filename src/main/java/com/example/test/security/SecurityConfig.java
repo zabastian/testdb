@@ -28,9 +28,10 @@ public class SecurityConfig {
                 )
                 .formLogin(login -> login.disable()) // 기본 제공되는 form 기반 로그인 화면을 사용하지 않겠다
                 .authorizeHttpRequests(auth -> auth // spring이 준 auth 설정 객첼 "/api/**" 경로에 인증 설정한다 즉, x -> x이런식이어도 상관없다
-                                .requestMatchers("/auth/signup", "/auth/login","/auth/refresh").permitAll()
+                                .requestMatchers("/","/auth/signup", "/auth/login","/auth/refresh","/signup").permitAll()
                                 .requestMatchers("/owner/**").hasRole("OWNER") // "ROLE_CUSTOMER" 권한을 갖고 있어야 함
                                 .requestMatchers("/customer/**").hasRole("CUSTOMER") // "ROLE_CUSTOMER" 권한을 갖고 있어야 함
+                                //.requestMatchers("/favicon.ico").permitAll()ß
 //                                .requestMatchers(HttpMethod.POST, "/owner/**").hasRole("OWNER")
 //                                .requestMatchers(HttpMethod.GET, "/owner/**").hasRole("OWNER")
 //                                .requestMatchers(HttpMethod.DELETE, "/owner/**").hasRole("OWNER")

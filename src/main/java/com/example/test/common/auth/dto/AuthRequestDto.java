@@ -1,9 +1,11 @@
 package com.example.test.common.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class AuthRequestDto {
 
 /*    @NotBlank(message = "userId가 빈값입니다.")

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <script src="https://www.google.com/recaptcha/api.js?render=SITE_KEY"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lc3q-wsAAAAAF1MOum6Ue_gHP5Fd4OiTb1NDf0N"></script>
 </head>
 <body>
 
@@ -25,14 +25,18 @@
     document.getElementById("loginForm")
         .addEventListener("submit", async function(e) {
 
+            console.log("submit");
+
             e.preventDefault();
 
             const token = await grecaptcha.execute(
-                'SITE_KEY',
+                '6Lc3q-wsAAAAAF1MOum6Ue_gHP5Fd4OiTb1NDf0N',
                 {action: 'login'}
             );
 
-            const response = await fetch("/login", {
+            console.log("프론트 token =", token);
+
+            const response = await fetch("/auth/login", {
 
                 method: "POST",
 
@@ -41,9 +45,9 @@
                 },
 
                 body: JSON.stringify({
-                    email: document.getElementById("email").value,
-                    password: document.getElementById("password").value,
-                    recaptchaToken: token
+                    userEmail: document.getElementById("email").value,
+                    userPassword: document.getElementById("password").value,
+                    recaptcha: token
                 })
             });
 

@@ -1,0 +1,33 @@
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>테스트</title>
+</head>
+<body>
+
+<button onclick="signup()">회원가입 테스트</button>
+
+<script>
+    async function signup() {
+
+        const response = await fetch("http://localhost:8080/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userEmail: "test@test.com",
+                userPassword: "1234"
+            })
+        });
+
+        const data = await response.json();
+
+        console.log(data);
+    }
+</script>
+
+</body>
+</html>-->
